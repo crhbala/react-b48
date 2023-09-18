@@ -3,11 +3,10 @@
 //for now does not recive any  arguments
 
 const App = () => {
-  //it can also execute or contain javascript code
-  console.log('Hello from componunt App');
+  const now = new Date()
   return (
     <div>
-      <p>Hello React</p>
+      <p>Hello React, it is{now.toString()}</p>
     </div>
   )
 }
