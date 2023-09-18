@@ -6,7 +6,7 @@ const App = () => {
   const now = new Date()
   return (
     <div>
-      <p>Hello React, it is{now.toString()}</p>
+      <p style={{color:'red', background:'yellow'}}>Hello React, it is{now.toString()}</p>
     </div>
   )
 }
