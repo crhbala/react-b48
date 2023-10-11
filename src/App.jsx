@@ -4,19 +4,19 @@ import Note from './Note';
 
 function App(props) {
   const { notes } = props;
-  const itemList = [];
+  const optionList = [];
   notes.forEach((note) => {
-    itemList.push(<Note key={note.id} note={note} />);
+    optionList.push(<Note key={note.id} note={note} />);
             
           })
   return (
     <div>
       <h1>Notes</h1>
-      <ul>
+      <select>
         {
-          itemList
+          optionList
         }
-      </ul>
+      </select>
     </div>
   )
 }
