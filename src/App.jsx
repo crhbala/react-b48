@@ -2,11 +2,25 @@
 //javascript function
 //for now does not recive any  arguments
 
-const App = () => {
-  const now = new Date()
+import { useState } from "react";
+
+function App() {
+  const [counter, setCounter] = useState(0);
+  const handlePluseClick = ()=>{
+    setCounter(counter + 1);
+  }
+  const handleZeroClick = () => {
+    setCounter(0);
+  }
+  const handleMinusClick = () => {
+    setCounter(counter - 1);
+  }
   return (
     <div>
-      <p style={{color:'red', background:'yellow'}}>Hello React, it is{now.toString()}</p>
+      <div>{counter}</div>
+      <button onClick={handlePluseClick}>Pluse</button>
+      <button onClick={handleMinusClick}>Minus</button>
+      <button onClick={handleZeroClick}>Zero</button>
     </div>
   )
 }
