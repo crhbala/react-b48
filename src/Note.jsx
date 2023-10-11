@@ -1,12 +1,8 @@
 function Note({ note }) {
   // const note = props.note;
-    if (note.important) {
-        return (
-            <li> {note.content} * </li>
-        )
-    }
+//    conditional rendering
     return (
-        <li> {note.content} </li>
+        <li> {note.important ? note.content + '*' :note.content} </li>
     )
 }
 
