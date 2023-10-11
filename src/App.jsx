@@ -1,27 +1,23 @@
-//our first react componunt
-//javascript function
-//for now does not recive any  arguments
+import React from 'react';//not necessary from react 17
 
-import { useState } from "react";
+function App(props) {
 
-function App() {
-  const [counter, setCounter] = useState(0);
-  const handlePluseClick = ()=>{
-    setCounter(counter + 1);
-  }
-  const handleZeroClick = () => {
-    setCounter(0);
-  }
-  const handleMinusClick = () => {
-    setCounter(counter - 1);
-  }
+  // console.log(props.notes);
+  const { notes } = props;
+
+  // console.log(notes);
   return (
     <div>
-      <div>{counter}</div>
-      <button onClick={handlePluseClick}>Pluse</button>
-      <button onClick={handleMinusClick}>Minus</button>
-      <button onClick={handleZeroClick}>Zero</button>
+      <h1>Notes</h1>
+      <ul>
+        {
+          notes.map((note) => {
+            return <li key={note.id}>{ note.content}</li> 
+          })
+        }
+      </ul>
     </div>
   )
 }
+
 export default App;
