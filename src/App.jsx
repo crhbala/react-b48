@@ -31,7 +31,7 @@ function App(props) {
       </form> */}
        <form>
         <input name='note'/>
-        <button onClick={()=>addNote()}>Save Note</button>
+        <button onClick={addNote}>Save Note</button>
       </form>
     </div>
   )
