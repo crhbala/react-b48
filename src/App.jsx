@@ -11,11 +11,12 @@ function App(props) {
   });
 
   const addNote = (event) => {
-    event.preventDefalt();
-    // console.log('button clicked');
-    // console.log(event.target);
+    // event.preventDefalt();
+    // // console.log('button clicked');
+    // // console.log(event.target);
 
     // console.log(event.target.elements.note.value);
+    console.log('Button Clicked');
   }
   return (
     <div>
@@ -24,9 +25,13 @@ function App(props) {
       {itemList}
       </ul> 
       
-      <form onSubmit={addNote}>
+      {/* <form onSubmit={addNote}>
         <input name='note'/>
         <button type='submit'>Save Note</button>
+      </form> */}
+       <form>
+        <input name='note'/>
+        <button onClick={()=>addNote()}>Save Note</button>
       </form>
     </div>
   )
