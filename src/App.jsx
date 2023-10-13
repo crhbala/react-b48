@@ -6,34 +6,51 @@ class App extends Component{
     super(props);
 
     this.state = {
-      count:0,
+      good: 0,
+      neutral: 0,
+      bad: 0,
+      
     }
   }
-  pluseClick = () => {
+  goodClick = () => {
     this.setState((prevState) => ({
-      count : prevState.count + 1,
+      good : prevState.good + 1,
     }))
   }
-  minusClick = () => {
-    if (this.state.count > 0) {
-      this.setState((prevState) => ({
-        count: prevState.count - 1,
-      }))
-    }
-  }
-   zero = () => {
+  neutralClick = () => {
     this.setState((prevState) => ({
-      count : 0,
+      neutral : prevState.neutral + 1,
     }))
+  }
+   badClick = () => {
+   this.setState((prevState) => ({
+      bad : prevState.bad + 1,
+    }))
+  }
+  reset = () => {
+    this.setState({
+      good: 0,
+      neutral: 0,
+      bad: 0,
+      
+    })
   }
 
   render() {
     return (
       <div>
-        <p>Count: {this.state.count}</p>
-        <button onClick={this.pluseClick}>Pluse</button>
-        <button onClick={this.minusClick}>Minus</button>
-        <button onClick={this.zero}>Zero</button>
+
+        <h1>Give Feedback</h1>
+        
+        <button onClick={this.goodClick}>Good</button>
+        <button onClick={this.neutralClick}>Neutral</button>
+        <button onClick={this.badClick}>Bad</button>
+
+        <h1>Statistics</h1>
+        <p>good: {this.state.good}</p>
+        <p>neutral: {this.state.neutral}</p>
+        <p>bad: {this.state.bad}</p>
+        <button onClick={this.reset}>Reset Feedbacks</button>
       </div>
     )
   }
