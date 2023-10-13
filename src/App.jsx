@@ -1,5 +1,9 @@
 import { useState } from "react";
-
+function Display({counter}) {
+  return (
+    <div> {counter} </div>
+  )
+}
 function App() {
   const [counter, setCounter] = useState(0);
 
@@ -18,7 +22,7 @@ function App() {
 
   return (
     <div>
-      <div> {counter} </div>
+      <Display counter={counter} />
       <button onClick={handleClickedPluse}>Plus</button>
       <button onClick={handleClickedMinus}>Minus</button>
       <button onClick={handleClickedZero}>Zero</button>
