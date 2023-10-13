@@ -1,22 +1,18 @@
-// import React from 'react';//this line code not necessary from react17
+//passing props in function component
+import React from "react";
 
-// function App() {
-//   return (
-//     <div>App</div>
-//   )
-// }
+function Hello({ name }) {
+  return (
+    <div>Hello, { name }</div>
+  )
+}
 
-// export default App;
-
-//class Component
-import { Component } from "react";
-
-class App extends Component{
-  render() {
-    return (
-      <div>Hello, World</div>
-    )
-  }
+function App() {
+  return (
+    <div>
+      <Hello name="Chris"/>
+    </div>
+  )
 }
 
 export default App;
