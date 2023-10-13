@@ -1,28 +1,28 @@
 import { Component } from "react";
-
-
+//stateful components
 
 class App extends Component{
-  //component life cycle
-  
-  //componentdidmount: called after the component has been rendered to the DOM
-  componentDidMount() {
-    console.log('component mounted');
-  }
-  //called imidiately after the component updated in the DOM
-  //called on state or prop changes
-  componentDidUpdate() {
-    console.log('component state updated');
-  }
+  constructor(props) {
+    super(props);
 
-  componentWillUnmount() {
-    //invoked just before the component is removed from the DOM
-    //relesing memory or resources
-    //detaching the events
-    //canceling timers
+    this.state = {
+      count:0,
+    }
+  }
+  increment = () => {
+    this.setState({
+      count:this.state.count+1,
+    })
   }
 
   render() {
-    return <div></div>
+    return (
+      <div>
+        <p>Count: {this.state.count}</p>
+        <button onClick={this.increment}>Increment</button>
+      </div>
+    )
   }
 }
+
+export default App;
