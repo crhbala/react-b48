@@ -1,9 +1,18 @@
 import { useState } from "react";
+
+
 function Display({counter}) {
   return (
     <div> {counter} </div>
   )
 }
+
+function Button({text,handClick}) {
+  return (
+    <button onClick={handClick}>{ text}</button>
+  )
+}
+
 function App() {
   const [counter, setCounter] = useState(0);
 
@@ -23,9 +32,9 @@ function App() {
   return (
     <div>
       <Display counter={counter} />
-      <button onClick={handleClickedPluse}>Plus</button>
-      <button onClick={handleClickedMinus}>Minus</button>
-      <button onClick={handleClickedZero}>Zero</button>
+      <Button text='plus' handClick = {handleClickedPluse} />
+      <Button text='minus' handClick={handleClickedMinus} />
+      <Button text='zero' handClick = {handleClickedZero} />
     </div>
    
   )
