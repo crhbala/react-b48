@@ -1,37 +1,36 @@
-import { useState } from "react";
-import Button from "./Button";
-
-function Display({counter}) {
-  return (
-    <div> {counter} </div>
-  )
-}
+import React, { useEffect, useState } from 'react';
 
 function App() {
-  const [counter, setCounter] = useState(0);
+  //create a state to store the data fetched from the API
+  const [data, setData] = useState(null);
 
-  const handleClickedPluse=()=>{
-    setCounter(counter + 1);
-  }
-  const handleClickedMinus = () => {
-    if (counter > 0) {
-      setCounter(counter - 1);
-    }
-    
-  }
-  const handleClickedZero=()=>{
-    setCounter(0)
-  }
+  //use the useEffect hook to run the function to call the api only one time
+
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/posts')
+      .then(response => response.json())
+      .then(result => setData(result));
+  }, []);
 
   return (
     <div>
-      <Display counter={counter} />
-      <Button text='plus' handClick = {handleClickedPluse} />
-      <Button text='minus' handClick={handleClickedMinus} />
-      <Button text='zero' handClick = {handleClickedZero} />
+      <h1>API DATA</h1>
+      {
+        data ? (
+          <ul>
+            {
+              data.map(item => {
+                return <li key={item.id}> {item.title} </li>
+              })
+            }
+          </ul>
+        ) : (
+            <p>Loding data...</p>
+        )
+      }
     </div>
-   
   )
 }
+
 
 export default App;
