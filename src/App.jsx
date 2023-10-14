@@ -1,31 +1,28 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-function GrandChildComponent({ parentData }) {
-  console.log(`from grand child component: ${parentData}`);
-  return (
-    <h3>Grand Child Component</h3>
-  )
-  
-}
+function ChildComponent({onMessage}) {
+  const message = `Hello from Child`;
 
-function ChildComponent({ parentData }) {
-  console.log(`from child component: ${parentData}`);
   return (
-    <div>
-      <h2>Child Component</h2>
-      <GrandChildComponent parentData = {parentData}/>
-    </div>
+    <>
+      <h2>Child Comonent</h2>
+      <button onClick={()=>onMessage(message)}>Send Message to the parent</button>
+    </>
   )
 }
 
 function App() {
-  const parentData = `Hello from Parent`;
-  
 
+  const [message, setMessage] = useState('');
+
+  const handleMessage = (data) => {
+    setMessage(data);
+  }
   return (
     <div>
-      <h1>Parent Component</h1>
-      <ChildComponent parentData = {parentData} />
+      <h2>Parent Component</h2>
+      <p>Message from the Child Component: { message}</p>
+      <ChildComponent onMessage={handleMessage} />
     </div>
   )
 }
