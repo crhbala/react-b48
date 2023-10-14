@@ -1,15 +1,9 @@
 import { useState } from "react";
-
+import Button from "./Button";
 
 function Display({counter}) {
   return (
     <div> {counter} </div>
-  )
-}
-
-function Button({text,handClick}) {
-  return (
-    <button onClick={handClick}>{ text}</button>
   )
 }
 
