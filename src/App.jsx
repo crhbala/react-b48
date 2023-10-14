@@ -27,4 +27,35 @@ function App() {
   )
 }
 
+/*
+  passing data from the parent component to child component:
+
+  parent Component:
+    const age = 25;
+    <child age = {age} name = {'satish'} />
+
+  child component:
+  props ->{
+    age:25,
+    name: 'satish'
+  }
+
+  passing data from the child component to parent component:
+
+    parent Component:
+      const [childAge, setChildAge]= useState(0);
+
+      const handlChildAge(age){
+      setChildAge(age);
+      }
+
+    <child handlChildAge ={handlChildAge} />
+
+  child component:
+  const age = 25;
+  props ->{handlChildAge:handlChildAge}
+  handlChildAge(25);
+  
+*/
+
 export default App;
