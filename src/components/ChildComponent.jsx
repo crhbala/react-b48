@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import GrandChildComponent from './GrandChildComponent';
+import { MessageContext } from '../App';
 
-function ChildComponent({ message }) {
-    const childMassage = `${message}Hello GrandChild`
+function ChildComponent() {
+    
+    const message = useContext(MessageContext);
+    const childMessage = 'Hello from Child';
+
   return (
-      <div>
+      <>
           <h2>ChildComponent</h2>
           <p>Message from Parent Component: <b>{message}</b></p>
-          <GrandChildComponent message = {childMassage} />
-      </div>
+          <GrandChildComponent/>
+      </>
       
   )
 }
