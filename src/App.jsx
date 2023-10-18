@@ -1,23 +1,17 @@
 import React from 'react'
-import { useEffect } from 'react';
-import { useRef } from 'react'
+import { useState } from 'react'
 
 function App() {
 
-  const countRef = useRef(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      countRef.current += 1;
-      console.log(countRef.current);
-    }, 1000);
-
-    
-  },[countRef])
+  const [count, setCount] = useState(0);
 
   return (
     <div>
-      <p>Counter:{countRef.current}</p>
+      <p>Count:{ count}</p>
+      <button onClick={() => setCount(count + 1)}>
+        Increment</button>
+      <button onClick={() => setCount(count - 1)}>Decrement</button>
+      <button onClick={() => setCount(0)}>Reset</button>
     </div>
   )
 }
