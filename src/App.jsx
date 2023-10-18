@@ -1,26 +1,31 @@
-//useRef - hook: to create a multable reference to an element or a value that persists across render cycles.
-
-//Example: focus the input text element on click of a button
-
-import React, { useRef } from 'react'
+import React, { useRef } from 'react';
+import SetInputFocus from './SetInputFocus';
 
 function App() {
+
   const inputRef = useRef(null);
 
-  const handlButtonClick = () => {
-    // console.log(inputRef.current.value);
+  const handleButtonClicked = () => {
     inputRef.current.focus();
   }
+
 
   return (
     <div>
       <input
-        type='text'
+        type="text"
         ref={inputRef}
-        />
-      <button onClick={handlButtonClick}>Focus Input</button> 
+      />
+      
+      <input
+        type="text"
+        ref={inputRef}
+      />
+
+      <button onClick={handleButtonClicked}>Focus Input</button>
+      <SetInputFocus inputRef={ inputRef} />
     </div>
   )
 }
 
-export default App
+export default App;
