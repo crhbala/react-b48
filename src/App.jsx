@@ -14,13 +14,15 @@ function App() {
   const [xIsNext, setXIsNext] = useState(true);
 
   function handleClike(i) {
-    if (squares[i]) {
-    return
-    }
+   
     const nextSquares = squares.slice();
-    nextSquares[i] = 'X';
-    console.log(nextSquares);
-    setSquares(nextSquares)
+    if (xIsNext) {
+      nextSquares[i] = 'X';
+    } else {
+      nextSquares[i] = 'O';
+    }
+    setSquares(nextSquares);
+    setXIsNext(!xIsNext);
 
  }
 
