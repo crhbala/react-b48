@@ -15,7 +15,7 @@ function App() {
 
   function handleClike(i) {
    
-    if (squares[i]) {
+    if (squares[i] || caculateWinner(squares)) {
       return;
     }
 
@@ -28,11 +28,43 @@ function App() {
     setSquares(nextSquares);
     setXIsNext(!xIsNext);
 
- }
+  }
+  
+  function caculateWinner(squares) {
+    const lines = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+    for (let i = 0; i < lines.length; i++) {
+      const [a, b, c] = lines[i];
+      if (squares[a] && squares[a] == squares[b] && squares[a] == squares[c]) {
+        return squares[a];
+      }
+      
+    }
 
+    return null;
+  }
+
+  let winner = caculateWinner(squares);
+  let status;
+  if (winner) {
+    status = "Winner:" + winner;
+  } else {
+    status = 'Next player:' + (xIsNext ? 'X' : 'O');
+  }
   
   return (
     <div>
+      <div>
+        {status}
+      </div>
       <div className='row'>
         <Button value={squares[0]} onClick={()=>handleClike(0)} />
         <Button value={squares[1]} onClick={()=>handleClike(1)} />
