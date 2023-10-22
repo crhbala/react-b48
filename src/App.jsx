@@ -1,9 +1,37 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 function App(props) {
     //define state
     const [notes, setNotes] = useState(props.notes);
     const [showStatus, setShowStatus] = useState('all');
+
+    //status for adding new note form
+    const [newNoteContant, setNewNoteContant] = useState('');
+    const [newNoteImportant, setNewNoteImportant] = useState('');
+
+    const newNoteContantRef = useRef(null);
+    useEffect(() => {
+        newNoteContantRef.current.focus();
+    }, [])
+
+    const addNote = (event) => {
+        event.preventDefault();
+        console.log(newNoteContant,newNoteImportant);
+
+        //create a new note subject
+        let noteObject = {
+            id: notes.length + 1,
+            content: newNoteContant,
+            important: newNoteImportant === 'true',
+        }
+        setNotes(notes.concat(noteObject));
+
+        //clear the inputs
+        setNewNoteContant('');
+        setNewNoteImportant('');
+        
+
+    }
 
     const handleStatusChange = (event) => {
         // console.log(event.target.value);
@@ -67,6 +95,34 @@ function App(props) {
                   )
               }
           </ul>
+          <h2>Add a New Note</h2>
+          <form onSubmit={addNote}>
+              <label>
+                  Contant: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input
+                      onChange={(e) => setNewNoteContant(e.target.value)}
+                      value={newNoteContant}
+                      ref={newNoteContantRef}
+                      required
+                  />
+              </label>
+              <br />
+               <br />
+              <label>
+                  Is Important: &nbsp;&nbsp;
+                  <select
+                      onChange={(e) => setNewNoteImportant(e.target.value)}
+                      value={newNoteImportant}
+                      required
+                  >
+                      <option disabled>--select--</option>
+                      <option>true</option>
+                      <option>false</option>
+                  </select>
+              </label>
+              <br /><br /><br />
+              <button type='submit'>Add New Note</button>
+          </form>
     </div>
   )
 }
