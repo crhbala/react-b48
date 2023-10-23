@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-function CreateNotes() {
+function CreateNotes({ newNoteContant, newNoteContantRef, setNewNoteContant, addNote, newNoteImportant, setNewNoteImportant }) {
+    
+useEffect(() => {
+        newNoteContantRef.current.focus();
+    }, []);
+
   return (
       <div>
            <h2>Add a New Note</h2>

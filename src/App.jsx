@@ -26,10 +26,6 @@ function App() {
     }
 
     useEffect(() => {
-        // newNoteContantRef.current.focus();
-    }, []);
-
-    useEffect(() => {
         fetchNotes();
     }, []);
 
@@ -78,20 +74,20 @@ function App() {
     let notesFilter = filterNotes(notes, showStatus);
     
     const padding = {
-        padding : 15,
+        paddingRight : 15,
     }
 
   return (
       <Router>
           <div>
-              <Link to="/">Dashboard</Link>
+              <Link to="/" style={padding}>Dashboard</Link>
               <Link to="/read" style={padding}>Read Notes</Link>
               <Link to="/create" state={padding}>CreateNotes</Link>
           </div>
           <Routes>
               <Route path='/' element={<Dashboard />} />
               <Route path='/read' element={<ReadNotes showStatus={showStatus} handleStatusChange={handleStatusChange} notesFilter={notesFilter} />} />
-              <Route path='/read' element={<CreateNotes/>}/>
+              <Route path='/create' element={<CreateNotes addNote={addNote} newNoteContant={newNoteContant} newNoteImportant={newNoteImportant} newNoteContantRef={newNoteContantRef} setNewNoteContant={setNewNoteContant} setNewNoteImportant={setNewNoteImportant} />}/>
           </Routes>
       </Router>
   )
