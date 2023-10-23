@@ -1,5 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
+import Dashboard from './Dashboard';
+import { Link, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import ReadNotes from './ReadNotes';
+import CreateNotes from './CreateNotes';
 
 function App() {
     //define state
@@ -11,21 +15,27 @@ function App() {
     const [newNoteImportant, setNewNoteImportant] = useState('');
 
     const newNoteContantRef = useRef(null);
+
+    const fetchNotes = async() => {
+        try {
+            const response = await axios.get('http://localhost:3000/notes/');
+            setNotes(response.data);
+        } catch (error) {
+            console.log('Failed to fetch notes:', error);
+        }
+    }
+
     useEffect(() => {
-        newNoteContantRef.current.focus();
+        // newNoteContantRef.current.focus();
     }, []);
 
     useEffect(() => {
-        axios
-            .get('http://localhost:3000/notes/')
-            .then(response =>{
-            setNotes(response.data);
-            })
-    },[])
+        fetchNotes();
+    }, []);
 
     const addNote = (event) => {
         event.preventDefault();
-        console.log(newNoteContant,newNoteImportant);
+        // console.log(newNoteContant,newNoteImportant);
 
         //create a new note subject
         let noteObject = {
@@ -33,14 +43,22 @@ function App() {
             content: newNoteContant,
             important: newNoteImportant === 'true',
         }
-        setNotes(notes.concat(noteObject));
+        // setNotes(notes.concat(noteObject));
+        console.log('adding new note....');
+        axios
+            .post('http://localhost:3000/notes/', noteObject)
+            .then(response => {
+            console.log('note added successfully....');
+        })
 
         //clear the inputs
         setNewNoteContant('');
         setNewNoteImportant('');
-        
 
+        newNoteContantRef.current.focus();
+        fetchNotes();
     }
+
 
     const handleStatusChange = (event) => {
         // console.log(event.target.value);
@@ -59,80 +77,23 @@ function App() {
     }
     let notesFilter = filterNotes(notes, showStatus);
     
+    const padding = {
+        padding : 15,
+    }
 
   return (
-      <div>
-          <h1>Notes</h1>
-
-          <label>
-              <input
-                  type="radio"
-                  name='filter'
-                  onChange={handleStatusChange}
-                  value='all'
-                  checked={showStatus==='all'}
-              />
-              All Notes
-          </label>
-
-          <label>
-              <input
-                  type="radio"
-                  name='filter'
-                  onChange={handleStatusChange}
-                  value='imp'
-                  checked={showStatus==='imp'}
-              />
-              Important Notes
-          </label>
-
-          <label>
-              <input
-                  type="radio"
-                  name='filter'
-                  onChange={handleStatusChange}
-                  value='nonimp'
-                  checked={showStatus==='nonimp'}
-              />
-              Non-Important Notes
-          </label>
-
-          <ul>
-              {
-                  notesFilter.map(note => 
-                      <li key={note.id}>{note.content}</li>
-                  )
-              }
-          </ul>
-          <h2>Add a New Note</h2>
-          <form onSubmit={addNote}>
-              <label>
-                  Contant: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <input
-                      onChange={(e) => setNewNoteContant(e.target.value)}
-                      value={newNoteContant}
-                      ref={newNoteContantRef}
-                      required
-                  />
-              </label>
-              <br />
-               <br />
-              <label>
-                  Is Important: &nbsp;&nbsp;
-                  <select
-                      onChange={(e) => setNewNoteImportant(e.target.value)}
-                      value={newNoteImportant}
-                      required
-                  >
-                      <option disabled>--select--</option>
-                      <option>true</option>
-                      <option>false</option>
-                  </select>
-              </label>
-              <br /><br /><br />
-              <button type='submit'>Add New Note</button>
-          </form>
-    </div>
+      <Router>
+          <div>
+              <Link to="/">Dashboard</Link>
+              <Link to="/read" style={padding}>Read Notes</Link>
+              <Link to="/create" state={padding}>CreateNotes</Link>
+          </div>
+          <Routes>
+              <Route path='/' element={<Dashboard />} />
+              <Route path='/read' element={<ReadNotes showStatus={showStatus} handleStatusChange={handleStatusChange} notesFilter={notesFilter} />} />
+              <Route path='/read' element={<CreateNotes/>}/>
+          </Routes>
+      </Router>
   )
 }
 
