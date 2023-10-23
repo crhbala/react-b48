@@ -1,8 +1,9 @@
+import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 
-function App(props) {
+function App() {
     //define state
-    const [notes, setNotes] = useState(props.notes);
+    const [notes, setNotes] = useState([]);
     const [showStatus, setShowStatus] = useState('all');
 
     //status for adding new note form
@@ -12,7 +13,15 @@ function App(props) {
     const newNoteContantRef = useRef(null);
     useEffect(() => {
         newNoteContantRef.current.focus();
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        axios
+            .get('http://localhost:3000/notes/')
+            .then(response =>{
+            setNotes(response.data);
+            })
+    },[])
 
     const addNote = (event) => {
         event.preventDefault();
