@@ -4,6 +4,8 @@ import Dashboard from './Dashboard';
 import { Link, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import ReadNotes from './ReadNotes';
 import CreateNotes from './CreateNotes';
+import EditNote from './EditNote';
+import DeleteNote from './DeleteNote';
 
 function App() {
     //define state
@@ -82,12 +84,17 @@ function App() {
           <div>
               <Link to="/" style={padding}>Dashboard</Link>
               <Link to="/read" style={padding}>Read Notes</Link>
-              <Link to="/create" state={padding}>CreateNotes</Link>
+              <Link to="/create" style={padding}>CreateNotes</Link>
+              <Link to="/edit" style={padding}>Edit Note</Link>
+              <Link to="/delete" style={padding}>Delete Note</Link>
           </div>
           <Routes>
               <Route path='/' element={<Dashboard />} />
               <Route path='/read' element={<ReadNotes showStatus={showStatus} handleStatusChange={handleStatusChange} notesFilter={notesFilter} />} />
-              <Route path='/create' element={<CreateNotes addNote={addNote} newNoteContant={newNoteContant} newNoteImportant={newNoteImportant} newNoteContantRef={newNoteContantRef} setNewNoteContant={setNewNoteContant} setNewNoteImportant={setNewNoteImportant} />}/>
+              <Route path='/create' element={<CreateNotes addNote={addNote} newNoteContant={newNoteContant} newNoteImportant={newNoteImportant} newNoteContantRef={newNoteContantRef} setNewNoteContant={setNewNoteContant} setNewNoteImportant={setNewNoteImportant} />} />
+              <Route path='/edit' element={<EditNote notes={notes} setNotes={ setNotes} />} />
+              <Route path='/delete' element={<DeleteNote notes={notes} setNotes={ setNotes} />} />
+              
           </Routes>
       </Router>
   )
