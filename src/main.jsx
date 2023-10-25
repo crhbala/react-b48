@@ -4,7 +4,11 @@ import App from './App.jsx';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
-const counterReducer = (state = 0, action)=>{
+let initialState = {
+    count : 0
+}
+
+const counterReducer = (state = initialState.count, action)=>{
     switch (action.type) {
         case 'INCR':
             return state + 1;
@@ -16,6 +20,7 @@ const counterReducer = (state = 0, action)=>{
             return state;
     }
 }
+
 
 //create a new store
 const store = createStore(counterReducer);
