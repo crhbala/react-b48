@@ -17,11 +17,9 @@ const counterReducer = (state = 0, action)=>{
     }
 }
 
+//create a new store
 const store = createStore(counterReducer);
 
+console.log(store.getState());
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-    <Provider store={store}>
-        <App />
-        </Provider>
-);
+ReactDOM.createRoot(document.getElementById('root')).render( <App />);
