@@ -1,24 +1,21 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { toggleImportanceOf } from './noteReducer';
+
 
 function Notes() {
 
     const dispatch = useDispatch();
-    const notes = useSelector(state => state.notes);
+    const notes = useSelector(state => {
+        if (state.filter === 'all') {
+            return state.notes;
+        }
+        return state.filter === 'important' ? state.notes.filter(note => note.important) : state.notes.filter(note => !note.important);
+    });
 
         const toggleImportance = (id) => {
         dispatch(toggleImportanceOf(id));
     }
-
-    const toggleImportanceOf = (id) => {
-
-    return {
-        type: 'TOGGLE_IMPORTANCE',
-        payload: {
-            id: id,
-        }
-    }
-}
 
   return (
       <div>
