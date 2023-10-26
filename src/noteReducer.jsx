@@ -1,7 +1,18 @@
-const noteReducer = (state = [], action) => {
-    if (action.type == 'NEW_NOTE') {
-        
+const initialState = [
+    {
+        content: 'reducer define how redux store works',
+        important: true,
+        id:1,
+    },
+    {
+        content: 'state of store can contain any data',
+        important: false,
+        id: 2,
     }
+]
+
+
+const noteReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'NEW_NOTE':
             return state.concat(action.payload);
@@ -19,16 +30,6 @@ const noteReducer = (state = [], action) => {
                 )
     }
     return state;
-}
-
-export const toggleImportanceOf = (id) => {
-    
-    return {
-        type: 'TOGGLE_IMPORTANCE',
-        payload: {
-            id: id,
-        }
-    }
 }
 
 const generateId = () => {
